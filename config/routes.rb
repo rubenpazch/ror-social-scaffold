@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  put '/addfriend/' => 'users#addfriend'
 
   root 'posts#index'
 
