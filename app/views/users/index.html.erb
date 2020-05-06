@@ -10,7 +10,12 @@
               
               <% if current_user.invites.find_by(user_id: user).present? %>
                   <% if current_user.invites.find_by(user_id: user).status==0 %>
-                    <p>Accept invitation</p>
+
+                    <%= form_for :friendship, :url=> {:controller => 'friendships', :action => @friendship } do |f| %>
+                      <%= f.hidden_field :status , :value => 1 %>
+                      <br/>
+                      <%= f.submit 'Accept Invitation' %>
+                    <% end %> 
                   <% else %>
                       <p>Your are friends</p>
                   <% end %>    

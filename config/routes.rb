@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
+  
   put '/addfriend/' => 'users#addfriend'
 
   root 'posts#index'
 
   devise_for :users
 
+  resources :friendships
   resources :users, only: [:index, :show]
   resources :posts, only: [:index, :create] do
     resources :comments, only: [:create]
