@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def addfriend
-      @friend = Friendship.new(friendship_params)
+    @friend = Friendship.new(friendship_params)
 
     if @friend.save
       flash[:notice] = 'You send a friendhsip invitation!'

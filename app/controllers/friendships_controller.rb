@@ -24,7 +24,6 @@ class FriendshipsController < ApplicationController
     end
   end
 
-
   def new
     @friend = Friendship.new
   end
