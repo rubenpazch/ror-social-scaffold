@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
   put '/addfriend/' => 'users#addfriend'
+  put '/accept/' => 'friendships#accept'
+  put '/reject/' => 'friendships#reject'
 
   root 'posts#index'
 

@@ -1,17 +1,29 @@
 class FriendshipsController < ApplicationController
-  def update
-    @friend = Friendship.find_by(user_id: current_user)
+  def accept
+    @friend = Friendship.find_by(id: friendship_params[:user_id])    
     @friend.status = friendship_params[:status]
 
-    if @friend.update
-      flash[:notice] = 'You send a friendhsip invitation!'
-      redirect_to root_path
+    if @friend.save
+      flash[:notice] = 'You accept a friendhsip invitation!'
+      redirect_to users_path
     else
       flash[:notice] = @friend.errors.full_messages
       redirect_to new_user_path
     end
-
   end
+
+  def reject
+    @friend = Friendship.find_by(id: friendship_params[:user_id])    
+    
+    if @friend.destroy
+      flash[:notice] = 'You reject a friendhsip invitation!'
+      redirect_to users_path
+    else
+      flash[:notice] = @friend.errors.full_messages
+      redirect_to new_user_path
+    end
+  end
+
 
   def new
     @friend = Friendship.new
