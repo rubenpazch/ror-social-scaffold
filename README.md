@@ -9,7 +9,7 @@
 
 ## Live Demo
 
-TBA - deveopment change
+TBA - erd change
 
 
 ## Getting Started
