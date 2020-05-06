@@ -2,32 +2,33 @@
   <ul class="users-list">
     <% @users.each do |user| %>
       <li>
-        Name: <%= user.name %>
+        Name:
+        <%= user.name %>
         <span class="profile-link">
-          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
+          <%= link_to 'See Profile', user_path(user), class: 'profile-link' %>
           <% if current_user != user %>
+
             <% if current_user.invites.find_by(user_id: user).present? %>
-
-              <% if current_user.invites.find_by(user_id: user).present? %>
-                  <% if current_user.invites.find_by(user_id: user).status == 0 %>
-                    <p><%= link_to 'Accept', accept_path(user_id: user, friend_id: current_user, status: 1), method: :put, data: { confirm: "Do you want to accept #{user.name} as friend?" } %></p>
-                    <p><%= link_to 'Reject', reject_path(user_id: user, friend_id: current_user, status: 1), method: :put, data: { confirm: "Do you want to reject #{user.name} as friend?" } %></p>
-                  <% else %>
-                      <p>Your are friends</p>
-                      <p><%= link_to 'End Friendship', reject_path(user_id: user, friend_id: current_user, status: 1), method: :put, data: { confirm: "Do you want to end your friendship with #{user.name}?" } %></p>
-                  <% end %>
-
-              <% else %>
-                  <% if user.invites.find_by(user_id: current_user).status == 0 %>
-                      <p>Pending invitation</p>
-                  <% else %>
-                      <p>Your are friends</p>
-                  <% end %>
-              <% end %>
-
+                <% if current_user.invites.find_by(user_id: user).status == 0 %>
+                  <p><%= link_to 'Accept', accept_path(user_id: user, friend_id: current_user, status: 1), method: :put, data: { confirm: "Do you want to accept #{user.name} as friend?" } %></p>
+                  <p><%= link_to 'Reject', reject_path(user_id: user, friend_id: current_user, status: 1), method: :put, data: { confirm: "Do you want to reject #{user.name} as friend?" } %></p>
+                <% else %>
+                  <p>Your are friends</p>
+                  <p><%= link_to 'End Friendship', reject_path(user_id: user, friend_id: current_user, status: 1), method: :put, data: { confirm: "Do you want to end your friendship with #{user.name}?" } %></p>
+                <% end %>
             <% else %>
-                <p><%= link_to 'Invite to friendship', addfriend_path(user_id: current_user, friend_id: user.id, status: 0), method: :put, data: { confirm: "Do you want to add #{user.name} as friend?" } %></p>
+              <% if user.invites.find_by(user_id: current_user).present? %>
+                  <% if user.invites.find_by(user_id: current_user).status == 0 %>
+                    <p>Pending invitation</p>
+                  <% else %>
+                    <p>Your are friends</p>
+                    <p><%= link_to 'End Friendship', reject_path(user_id: current_user, friend_id: user, status: 1), method: :put, data: { confirm: "Do you want to end your friendship with #{user.name}?" } %></p>
+                  <% end %>
+              <% else %>
+                  <p><%= link_to 'Invite to friendship', addfriend_path(user_id: current_user, friend_id: user.id, status: 0), method: :put, data: { confirm: "Do you want to add #{user.name} as friend?" } %></p>
+              <% end %>
             <% end %>
+
           <% end %>
         </span>
       </li>
