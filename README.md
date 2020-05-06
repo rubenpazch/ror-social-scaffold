@@ -9,7 +9,7 @@
 
 ## Live Demo
 
-TBA - deveopment change
+TBA - model change
 
 
 ## Getting Started
