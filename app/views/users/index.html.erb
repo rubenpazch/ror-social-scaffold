@@ -13,7 +13,7 @@
                   <p>Your are friends</p>
                   <p><%= link_to 'End Friendship', reject_path(user_id: user, friend_id: current_user), method: :put, data: { confirm: "Do you want to end your friendship with #{user.name}?" } %></p>
                 <% else %>
-                  <p><%= link_to 'Accept', addfriend_path(user_id: user, friend_id: current_user), method: :put, data: { confirm: "Do you want to accept #{user.name} as friend?" } %></p>
+                  <p><%= link_to 'Accept', addfriend_path(user_id: current_user, friend_id: user), method: :put, data: { confirm: "Do you want to accept #{user.name} as friend?" } %></p>
                   <p><%= link_to 'Reject', reject_path(user_id: user, friend_id: current_user), method: :put, data: { confirm: "Do you want to reject #{user.name} as friend?" } %></p>
                 <% end %>
             <% else %>
@@ -25,7 +25,7 @@
                     <p>Pending invitation</p>
                   <% end %>
               <% else %>
-                  <p><%= link_to 'Invite to friendship', addfriend_path(user_id: current_user, friend_id: user.id), method: :put, data: { confirm: "Do you want to add #{user.name} as friend?" } %></p>
+                  <p><%= link_to 'Invite to friendship', addfriend_path(user_id: current_user, friend_id: user), method: :put, data: { confirm: "Do you want to add #{user.name} as friend?" } %></p>
               <% end %>
             <% end %>
 
