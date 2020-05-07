@@ -14,8 +14,10 @@ class FriendshipsController < ApplicationController
 
   def reject
     @friend = Friendship.find_by(user_id: params[:user_id])
+    @friend2 = Friendship.find_by(user_id: params[:friend_id])
 
     if @friend.destroy
+      @friend2.destroy
       flash[:notice] = 'You reject a friendhsip invitation!'
       redirect_to users_path
     else
