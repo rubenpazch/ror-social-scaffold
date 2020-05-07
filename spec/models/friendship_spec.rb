@@ -3,17 +3,38 @@ require 'rails_helper'
 RSpec.describe Friendship, type: :model do
   context 'validation tests' do
     before :each do
-      # @user = users(:first)
-      @friendship = Friendship.new(user_id: 1, friend_id: 2, status: 0)
+      @user1 = User.create(name: 'carlos', email: 'foo@bar.com', password: 'foobar')
+      @user2 = User.create(name: 'pedro', email: 'four@bar.com', password: 'fourbar')
+      @user3 = User.new(name: 'paul', email: 'four@bar.com', password: 'fourbar')
+      @friendship1 = Friendship.new(user_id: @user1.id, friend_id: @user2.id)
+      @friendship2 = Friendship.new(user_id: @user2.id, friend_id: @user1.id)
     end
+    context 'validation tests' do
+      describe 'for friendships' do
+        it 'has to have a friend_id' do
+          expect(@friendship1.friend_id).to eq(@user2.id)
+        end
 
-    it 'should not be valid if friendship creator is not present' do
-      expect(@friendship).to_not be_valid
-    end
+        it 'is not valid without user_id' do
+          @friendship1.user_id = nil
+          expect(@friendship1).to_not be_valid
+        end
 
-    it 'status should be present' do
-      @friendship.status = '   '
-      expect(@friendship).to_not be_valid
+        it 'is not valid without friend_id' do
+          @friendship1.friend_id = nil
+          expect(@friendship1).to_not be_valid
+        end
+
+        it 'is not valid if the requested friend doesnt exist' do
+          @friendship1.friend_id = @user3.id
+          expect(@friendship1).to_not be_valid
+        end
+
+        it 'returns an error for missing friend_id' do
+          @friendship1.friend_id = nil
+          expect(@friendship1.save).to eq(false)
+        end
+      end
     end
   end
 
