@@ -21,6 +21,7 @@ class PostsController < ApplicationController
 
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Naming/VariableName
+  # rubocop:disable Lint/AmbiguousOperator
   def timeline_posts
     @invitations = current_user.invites
     @invitations_accepted = @invitations.where('status > ?', 0).all
@@ -57,6 +58,7 @@ class PostsController < ApplicationController
 
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Naming/VariableName
+  # rubocop:enable Lint/AmbiguousOperator
   def post_params
     params.require(:post).permit(:content)
   end
