@@ -9,7 +9,11 @@
 
 ## Live Demo
 
+<<<<<<< HEAD
 TBA - erd change
+=======
+TBA - model change
+>>>>>>> 79d9c8d6432a31a48adf20b0c57d6a97990cf6aa
 
 
 ## Getting Started
