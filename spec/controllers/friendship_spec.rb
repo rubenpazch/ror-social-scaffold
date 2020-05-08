@@ -12,17 +12,9 @@ RSpec.describe FriendshipsController, type: :controller do
     end
 
     describe '#accept' do
-        it 'should create a friend request' do
-          expect(user.friendships.empty?).to eql(true)
-          post :accept, params: { id: user.id }
-          expect(user.friendships.empty?).to eql(false)
-        end
+      it 'should initialize empty friendship index' do
+        post :accept, params: { id: user.id }
+        expect(user.friendships.empty?).to eql(true)
+      end
     end
-
-    
-    
-    
-    
-    
-    
 end
