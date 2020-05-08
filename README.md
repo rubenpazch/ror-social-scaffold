@@ -8,12 +8,7 @@
 - Ruby on Rails v5.2.4
 
 ## Live Demo
-
-<<<<<<< HEAD
-TBA - erd change
-=======
-TBA - model change
->>>>>>> 79d9c8d6432a31a48adf20b0c57d6a97990cf6aa
+[Hosted on Heroku](https://social-microverse.herokuapp.com/)
 
 
 ## Getting Started
@@ -63,11 +58,44 @@ Open `http://localhost:3000/` in your browser.
 
 ### Deployment
 
-TBA
++ Open terminal on your workspace with
+```
+cd /home/projects_workspace/..
+```
++ Cloning the project input the next code:
+```
+git clone https://github.com/rubenpazch/ror-social-scaffold.git
+```
++ Navigate to the folder of the project
+```
+cd /ror-social-scaffold/
+```
+Migrate the database
+```
+rails db:migrate
+```
+Populating with data
+```
+rake db:setup
+```
+Run the server
+```
+rails server
+```
 
 ## Authors
 
-TBA
+👤 **Ruben Paz Chuspe**
+
+- Github: [@rubenpazch](https://github.com/rubenpazch)
+- Linkedin: [rubenpch](https://www.linkedin.com/in/rubenpch/)
+
+👤 **Isaac Gonzalez**
+
+- Github: [@idgm5](https://github.com/idgm5)
+- Twitter: [@idgm5](https://twitter.com/idgm5)
+- Linkedin: [Isaac Gonzalez](https://www.linkedin.com/in/isaacmunguia)
+
 
 ## 🤝 Contributing
 
@@ -79,11 +107,11 @@ Feel free to check the [issues page](issues/).
 
 Give a ⭐️ if you like this project!
 
-## Acknowledgments
+## Acknowledgements
 
-TBA
++ [Github](http://github.com/).
++ [The Odin Project](theodinproject.com/).
 
-## 📝 License
+## License
 
-TBA
-
+This project is [MIT](lic.url) licensed.
