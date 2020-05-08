@@ -11,7 +11,14 @@
 
 <article class="timeline">
   <h3>
-    Recent posts
+    Recent posts by friends
+  </h3>
+  <ul class="posts">
+    <%= render @timeline_friend_posts %>
+  </ul>
+
+  <h3>
+    Your recent posts
   </h3>
   <ul class="posts">
     <%= render @timeline_posts %>
