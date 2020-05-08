@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   # rubocop: disable Layout/LineLength
   def addfriend
     @friend = Friendship.new(friendship_params)
-    if Friendship.find_by(user_id: params[:user_id]).present? || Friendship.find_by(friend_id: params[:user_id]).present?
+    if Friendship.find_by(user_id: params[:user_id]).present? && Friendship.find_by(friend_id: params[:user_id]).present?
       flash[:notice] = 'YOU ALREADY HAVE A PENDING INVITATION!'
       redirect_to root_path
     elsif @friend.save
