@@ -10,17 +10,8 @@
 <% end %>
 
 <article class="timeline">
-  <% if @timeline_friend_posts.present? %>
   <h3>
-    Recent posts by friends
-  </h3>
-  <ul class="posts">
-    <%= render @timeline_friend_posts %>
-  </ul>
-  <% end %>
-
-  <h3>
-    Your recent posts
+    Recent posts
   </h3>
   <ul class="posts">
     <%= render @timeline_posts %>

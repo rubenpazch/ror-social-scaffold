@@ -38,14 +38,20 @@ class PostsController < ApplicationController
       @friend_posts_friendships ||= @friend.posts.ordered_by_most_recent
     end
 
-    @timeline_posts ||= current_user.posts.all.ordered_by_most_recent
+    @timeline_posts ||= current_user.posts
 
     if @friend_posts_invites.nil? && @friend_posts_friendships .nil?
       @timeline_posts ||= Post.all.ordered_by_most_recent.includes(:user)
     elsif @friend_posts_invites.nil?
-      @timeline_friend_posts ||= @friend_posts_friendships.all.ordered_by_most_recent
+      @timeline_friend_posts ||= @friend_posts_friendships
+      @sum_posts = @timeline_posts + @timeline_friend_posts
+      @sort_posts = @sum_posts.sort_by &:created_at
+      @timeline_posts = @sort_posts.reverse
     else
-      @timeline_friend_posts ||= @friend_posts_invites.all.ordered_by_most_recent
+      @timeline_friend_posts ||= @friend_posts_invites
+      @sum_posts = @timeline_posts + @timeline_friend_posts
+      @sort_posts = @sum_posts.sort_by &:created_at
+      @timeline_posts = @sort_posts.reverse
     end
   end
 
