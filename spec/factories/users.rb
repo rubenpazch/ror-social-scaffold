@@ -19,4 +19,10 @@ FactoryBot.define do
       password { 'password' }
       password_confirmation { 'password' }
     end
+
+    factory :friendship do
+      user_id { create(:user).id }
+      friend_id { create(:user).id }
+      status { 0 }
+    end
   end
