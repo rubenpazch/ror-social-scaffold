@@ -1,4 +1,5 @@
 FactoryBot.define do
+<<<<<<< HEAD
     factory :user do
       name { 'Raul' }
       email { 'raul@gmail.com' }
@@ -25,4 +26,12 @@ FactoryBot.define do
       friend_id { create(:user).id }
       status { 0 }
     end
+=======
+  factory :user do
+    name { Faker::Name.name }
+    email { Faker::Internet.email }
+    password { 'password' }
+    password_confirmation { 'password' }
+>>>>>>> e697a4e4a53d2fd02d90fc22b01afc99b428f7ce
   end
+end
