@@ -1,14 +1,13 @@
 class FriendshipsController < ApplicationController
   def accept
-    @friend = Friendship.find_by(user_id: params[:user_id])
-    #@friend.update(status: params[:status])
+    @friend = Friendship.find_by(user_id: params[:user_id])    
 
-    if @friend.update(status: params[:status])
+    if @friend.update(status: params[:status])      
       flash[:notice] = 'You accept a friendhsip invitation!'
       redirect_to users_path
     else
       flash[:notice] = @friend.errors.full_messages
-      redirect_to new_user_path
+      redirect_to new_user_registration_path
     end
   end
 
@@ -20,7 +19,7 @@ class FriendshipsController < ApplicationController
       redirect_to users_path
     else
       flash[:notice] = @friend.errors.full_messages
-      redirect_to new_user_path
+      redirect_to new_user_registration_path
     end
   end
 
@@ -31,6 +30,6 @@ class FriendshipsController < ApplicationController
   private
 
   def friendship_params
-    params.permit(:user_id, :friend_id, :status)
+    params.permit(:user_id, :friend_id, :status)    
   end
 end
