@@ -28,7 +28,8 @@
                   <p><%= link_to 'Invite to friendship', addfriend_path(user_id: current_user, friend_id: user.id, status: 0), method: :put, data: { confirm: "Do you want to add #{user.name} as friend?" } %></p>
               <% end %>
             <% end %>
-
+          <% else %>
+            <p> You are this user </p>
           <% end %>
         </span>
       </li>
