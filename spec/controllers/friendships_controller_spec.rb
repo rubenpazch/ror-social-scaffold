@@ -4,6 +4,7 @@ RSpec.describe FriendshipsController, type: :controller do
   let(:user) { FactoryBot.create :user }
   let(:user2) { FactoryBot.create :user }
   let(:friendship1) { FactoryBot.create :friendship }
+  let(:friendship2) { FactoryBot.create :friendship }
   
   before { sign_in user }
   before { sign_in user2 }  
@@ -15,13 +16,7 @@ RSpec.describe FriendshipsController, type: :controller do
     end
   end
 
-  describe '#accept' do
-    
-    #it 'should initialize empty friendship index' do
-    #  put :accept, params: { status: 1 }
-    #  expect(friendships.empty?).to eql(true)
-    #end
-
+  describe '#accept' do    
     it "updates friendship object status" do
       put :accept, params: { :user_id => friendship1.user_id, :friend_id => friendship1.friend_id, :status =>1 } 
       expect(friendship1.reload.status).to  eql(1)
@@ -31,11 +26,16 @@ RSpec.describe FriendshipsController, type: :controller do
       put :accept, params: { :user_id => friendship1.user_id, :friend_id => friendship1.friend_id, :status =>1 } 
       expect(response).to  redirect_to users_path
     end
+  end
 
-    #it "does not updates friendship object status and redirect to new_user_path" do      
-    #  put :accept, params: { :user_id => friendship1.user_id, :friend_id => friendship1.friend_id } 
-    #  expect(response).to redirect_to(new_user_registration_url)      
-    #end
+  describe '#reject' do    
+    it "destroy friendship object and count -1" do
+      expect { put :reject, params: { :user_id => friendship1.user_id, :friend_id => friendship1.friend_id, :status =>1 } }.to change(Friendship, :count).by(0)      
+    end
 
+    it "destroy friendship object and redirect to users_path" do
+      put :reject, params: { :user_id => friendship1.user_id, :friend_id => friendship1.friend_id, :status =>1 } 
+      expect(response).to  redirect_to users_path
+    end
   end
 end
