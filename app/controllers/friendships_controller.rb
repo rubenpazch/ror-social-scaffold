@@ -1,8 +1,8 @@
 class FriendshipsController < ApplicationController
   def accept
-    @friend = Friendship.find_by(user_id: params[:user_id])    
+    @friend = Friendship.find_by(user_id: params[:user_id])
 
-    if @friend.update(status: params[:status])      
+    if @friend.update(status: params[:status])
       flash[:notice] = 'You accept a friendhsip invitation!'
       redirect_to users_path
     else
@@ -30,6 +30,6 @@ class FriendshipsController < ApplicationController
   private
 
   def friendship_params
-    params.permit(:user_id, :friend_id, :status)    
+    params.permit(:user_id, :friend_id, :status)
   end
 end

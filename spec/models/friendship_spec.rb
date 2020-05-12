@@ -1,3 +1,5 @@
+# rubocop:disable Metrics/BlockLength
+
 require 'rails_helper'
 
 RSpec.describe Friendship, type: :model do
@@ -48,3 +50,4 @@ RSpec.describe Friendship, type: :model do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
