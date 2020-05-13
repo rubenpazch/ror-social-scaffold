@@ -1,5 +1,29 @@
 <section class="user-section">
   <h2><%= "Name: #{@user.name}" %></h2>
+  <% if current_user != @user %>
+
+    <% if current_user.invites.find_by(user_id: @user).present? %>
+        <% if current_user.invites.find_by(user_id: @user).status == 0 %>
+          <button><%= link_to 'Accept', accept_path(user_id: @user, friend_id: current_user, status: 1), method: :put, data: { confirm: "Do you want to accept #{@user.name} as friend?" } %></button>
+          <button><%= link_to 'Reject', reject_path(user_id: @user, friend_id: current_user, status: 1), method: :put, data: { confirm: "Do you want to reject #{@user.name} as friend?" } %></button>
+        <% else %>
+          <p>Your are friends</p>
+          <button><%= link_to 'End Friendship', reject_path(user_id: @user, friend_id: current_user, status: 1), method: :put, data: { confirm: "Do you want to end your friendship with #{@user.name}?" } %></button>
+        <% end %>
+    <% else %>
+      <% if @user.invites.find_by(user_id: current_user).present? %>
+          <% if @user.invites.find_by(user_id: current_user).status == 0 %>
+            <p>Pending invitation</p>
+          <% else %>
+            <p>Your are friends</p>
+            <button><%= link_to 'End Friendship', reject_path(user_id: current_user, friend_id: @user, status: 1), method: :put, data: { confirm: "Do you want to end your friendship with #{@user.name}?" } %></button>
+          <% end %>
+      <% else %>
+          <button><%= link_to 'Invite to friendship', addfriend_path(user_id: current_user, friend_id: @user, status: 0), method: :put, data: { confirm: "Do you want to add #{@user.name} as friend?" } %></button>
+      <% end %>
+    <% end %>
+
+  <% end %>
   <article class="timeline">
     <h3>Recent posts:</h3>
     <ul class="posts">
